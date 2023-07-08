@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, Image, ImageBackground} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 
 export class GenericCard extends Component {
   constructor(props) {
@@ -40,25 +47,30 @@ export class WorkoutsCard extends Component {
   }
 
   render() {
-    const {title, time, image} = this.props;
+    const {title, time, image, onPress, type} = this.props;
 
     return (
-      <View style={styles.workoutCard}>
-        <ImageBackground
-          source={image}
-          style={styles.image}
-          imageStyle={{borderRadius: 20}}>
-          <View style={styles.innerCard}>
-            <></>
-            <View style={styles.innerCardTxt}>
-              <Text style={styles.txt}>{title}</Text>
-              <Text style={styles.txt}>
-                {time.toString()} {'min'}
-              </Text>
+      <TouchableOpacity
+        key={title}
+        onPress={onPress(type)}
+        style={{borderRadius: 20}}>
+        <View style={styles.workoutCard}>
+          <ImageBackground
+            source={image}
+            style={styles.image}
+            imageStyle={{borderRadius: 20}}>
+            <View style={styles.innerCard}>
+              <></>
+              <View style={styles.innerCardTxt}>
+                <Text style={styles.txt}>{title}</Text>
+                <Text style={styles.txt}>
+                  {time.toString()} {'min'}
+                </Text>
+              </View>
             </View>
-          </View>
-        </ImageBackground>
-      </View>
+          </ImageBackground>
+        </View>
+      </TouchableOpacity>
     );
   }
 }

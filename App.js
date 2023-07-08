@@ -16,8 +16,50 @@ import {
 import Home from './pages/Home';
 import {workouts} from './mock/workouts';
 import {WorkoutsCard} from './components/Card';
+import {useMediaQuery} from 'react-responsive';
+import {useState, useEffect} from 'react';
+import WorkoutStages from './pages/WorkoutStages';
 
 function App() {
+  const isPhone = useMediaQuery({
+    maxDeviceWidth: 650,
+  });
+
+  const [workoutType, setWorkoutType] = useState('');
+  const [currentStageNumber, setCurrentStageNumber] = useState(-1);
+  const [timeLeft, setTimeLeft] = useState(0);
+
+  useEffect(() => {
+    // exit early when we reach 0
+    // save intervalId to clear the interval when the
+    // component re-renders
+    const intervalId = setInterval(() => {
+      setTimeLeft(timeLeft - 1);
+    }, 1000);
+
+    // clear interval on re-render to avoid memory leaks
+    return () => clearInterval(intervalId);
+  });
+
+  const intervalId = 0;
+
+  if (workoutType !== '') {
+    return WorkoutStages(
+      setWorkoutType,
+      workoutType,
+      setCurrentStageNumber,
+      currentStageNumber,
+      timeLeft,
+      setTimeLeft,
+      intervalId,
+      isPhone,
+    );
+  }
+
+  const handleCardOnPress = type => {
+    setWorkoutType(type);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerSection}>
@@ -37,6 +79,8 @@ function App() {
                 title={item.title}
                 time={item.time}
                 image={item.img}
+                onPress={handleCardOnPress}
+                type={item.type}
               />
             </View>
           );

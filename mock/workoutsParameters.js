@@ -1,14 +1,14 @@
-import crunch from '../assets/excerciseVideos/crunch.mp4';
-import highKnees from '../assets/excerciseVideos/highKnees.mp4';
-import jumpingJack from '../assets/excerciseVideos/jumpingJack.mp4';
-import lunge from '../assets/excerciseVideos/lunge.mp4';
-import plank from '../assets/excerciseVideos/plank.mp4';
-import plankLeft from '../assets/excerciseVideos/plankLeft.mp4';
-import sidePlankRight from '../assets/excerciseVideos/sidePlankRight.mp4';
-import pushupRotation from '../assets/excerciseVideos/pushupRotation.mp4';
-import squat from '../assets/excerciseVideos/squat.mp4';
-import pushup from '../assets/excerciseVideos/pushup.mp4';
-import finished from '../assets/excerciseVideos/finished.mp4';
+import crunch from '../assets/exercisesVideos/crunch.mp4';
+import highKnees from '../assets/exercisesVideos/highKnees.mp4';
+import jumpingJack from '../assets/exercisesVideos/jumpingJack.mp4';
+import lunge from '../assets/exercisesVideos/lunge.mp4';
+import plank from '../assets/exercisesVideos/plank.mp4';
+import plankLeft from '../assets/exercisesVideos/plankLeft.mp4';
+import sidePlankRight from '../assets/exercisesVideos/sidePlankRight.mp4';
+import pushupRotation from '../assets/exercisesVideos/pushupRotation.mp4';
+import squat from '../assets/exercisesVideos/squat.mp4';
+import pushup from '../assets/exercisesVideos/pushup.mp4';
+import finished from '../assets/exercisesVideos/finished.mp4';
 
 export const workoutStartLabel = 'Get Ready !!';
 export const workoutFinishLabel = 'Congratulations!! Workout complete !';

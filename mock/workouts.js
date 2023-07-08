@@ -8,17 +8,20 @@ export const workouts = [
     title: 'Short, sweet, sweat',
     time: 3,
     img: girlWorkout,
+    type: '3min',
   },
   {
     id: 1,
     title: 'Full body burner',
     time: 5,
     img: pushup,
+    type: '5min',
   },
   {
     id: 2,
     title: 'Daily intense workout',
     time: 8,
     img: squat,
+    type: '8min',
   },
 ];
