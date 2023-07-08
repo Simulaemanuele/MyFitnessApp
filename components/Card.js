@@ -48,10 +48,15 @@ export class WorkoutsCard extends Component {
           source={image}
           style={styles.image}
           imageStyle={{borderRadius: 20}}>
-          <Text style={{color: '#fff'}}>{title}</Text>
-          <Text style={{color: '#fff'}}>
-            {time.toString()} {'min'}
-          </Text>
+          <View style={styles.innerCard}>
+            <></>
+            <View style={styles.innerCardTxt}>
+              <Text style={styles.txt}>{title}</Text>
+              <Text style={styles.txt}>
+                {time.toString()} {'min'}
+              </Text>
+            </View>
+          </View>
         </ImageBackground>
       </View>
     );
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
     height: 200,
     padding: 10,
     borderRadius: 20,
-    backgroundColor: 'blue',
+    backgroundColor: '#192a56',
   },
   image: {
     width: '100%',
@@ -72,5 +77,21 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'center',
     borderRadius: 20,
+  },
+  innerCard: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  innerCardTxt: {
+    alignItems: 'center',
+  },
+  txt: {
+    color: '#ffffff',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontFamily: 'Ubuntu',
+    fontSize: 30,
+    lineHeight: 34,
   },
 });
