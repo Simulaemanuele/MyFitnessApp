@@ -1,5 +1,9 @@
 import React from 'react';
-import {workoutPlans} from '../mock/workoutsParameters';
+import {
+  workoutFinishLabel,
+  workoutPlans,
+  workoutStartLabel,
+} from '../mock/workoutsParameters';
 import {Platform, StyleSheet} from 'react-native';
 import {
   finishWorkout,
@@ -18,7 +22,68 @@ const WorkoutStages = ({
   intervalId,
   isPhone,
 }) => {
-  const workoutSelected = workoutPlans[workoutType];
+  const defaultDataStructure = {
+    '3min': [
+      [workoutStartLabel, 3],
+      ['jumping jacks', 30],
+      ['pushups', 30],
+      ['squats', 30],
+      ['plank', 30],
+      ['lunges both sides', 30],
+      ['pushup with rotation', 30],
+      [workoutFinishLabel, 5],
+    ],
+    '5min': [
+      [workoutStartLabel, 3],
+      ['jumping jacks', 30],
+      ['rest', 5],
+      ['pushups', 30],
+      ['rest', 5],
+      ['crunches', 30],
+      ['rest', 5],
+      ['squats', 30],
+      ['rest', 5],
+      ['plank', 30],
+      ['rest', 5],
+      ['high knees', 30],
+      ['rest', 5],
+      ['lunges both sides', 30],
+      ['rest', 5],
+      ['pushup with rotation', 30],
+      [workoutFinishLabel, 5],
+    ],
+    '8min': [
+      [workoutStartLabel, 3],
+      ['jumping jacks', 30],
+      ['rest', 10],
+      ['pushups', 30],
+      ['rest', 10],
+      ['crunches', 30],
+      ['rest', 10],
+      ['squats', 30],
+      ['rest', 10],
+      ['plank', 30],
+      ['rest', 10],
+      ['high knees', 30],
+      ['rest', 10],
+      ['lunge right', 30],
+      ['rest', 10],
+      ['lunges left', 30],
+      ['rest', 10],
+      ['pushup with rotation', 30],
+      ['rest', 10],
+      ['side plank left', 30],
+      ['rest', 10],
+      ['side plank right', 30],
+      ['rest', 10],
+      ['squats', 30],
+      [workoutFinishLabel, 5],
+    ],
+  };
+  const workoutSelected =
+    workoutPlans && workoutType
+      ? workoutPlans[workoutType]
+      : defaultDataStructure[workoutType];
 
   if (currentStageNumber < 0) {
     setTimeLeft(workoutSelected[0][1]);

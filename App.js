@@ -43,7 +43,20 @@ function App() {
 
   const intervalId = 0;
 
-  if (workoutType !== '') {
+  // if (workoutType !== '') {
+  //   return WorkoutStages(
+  //     setWorkoutType,
+  //     workoutType,
+  //     setCurrentStageNumber,
+  //     currentStageNumber,
+  //     timeLeft,
+  //     setTimeLeft,
+  //     intervalId,
+  //     isPhone,
+  //   );
+  // }
+
+  const renderWorkoutStages = () => {
     return WorkoutStages(
       setWorkoutType,
       workoutType,
@@ -54,7 +67,7 @@ function App() {
       intervalId,
       isPhone,
     );
-  }
+  };
 
   const handleCardOnPress = type => {
     setWorkoutType(type);
@@ -79,7 +92,7 @@ function App() {
                 title={item.title}
                 time={item.time}
                 image={item.img}
-                onPress={handleCardOnPress}
+                onPress={() => handleCardOnPress}
                 type={item.type}
               />
             </View>
@@ -87,6 +100,8 @@ function App() {
         }}
         keyExtractor={item => item.id}
       />
+
+      <View>{workoutType != '' && renderWorkoutStages()}</View>
     </View>
   );
 }

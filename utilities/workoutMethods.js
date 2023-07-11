@@ -28,7 +28,7 @@ export const nextExercise = (
   exerciseTime,
 ) => {
   setCurrentStageNumber(currentStageNumber + 1);
-  if (currentStageNumber + 1 !== workoutSelected.length) {
+  if (currentStageNumber + 1 !== workoutSelected?.length) {
     const nextExerciseTime = workoutSelected[currentStageNumber + 1][1];
     setTimeLeft(nextExerciseTime);
   }
@@ -49,7 +49,9 @@ export const previousExercise = (
 };
 
 export const getAmountOfExercisesTillNow = (workoutSelected, index) => {
-  workoutSelected = workoutSelected.slice(0, index);
+  console.log('workoutSelected: ', workoutSelected);
+  workoutSelected =
+    workoutSelected !== undefined ? workoutSelected.slice(0, index) : '3min';
   let amountOfRests = 0;
   for (const exercise of workoutSelected) {
     if (!isExercise(exercise[0])) {

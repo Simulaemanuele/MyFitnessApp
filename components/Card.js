@@ -42,10 +42,6 @@ export class WorkoutsCard extends Component {
     });
   }
 
-  shouldComponentUpdate(prevProps) {
-    return prevProps !== this.props;
-  }
-
   render() {
     const {title, time, image, onPress, type} = this.props;
 
