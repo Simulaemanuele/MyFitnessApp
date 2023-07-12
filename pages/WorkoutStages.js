@@ -1,16 +1,20 @@
 import React from 'react';
 import {
+  videosPerExercise,
   workoutFinishLabel,
   workoutPlans,
   workoutStartLabel,
 } from '../mock/workoutsParameters';
-import {Platform, StyleSheet} from 'react-native';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {
   finishWorkout,
   getAmountOfExercisesTillNow,
+  isExercise,
   nextExercise,
   renderPreviousButton,
 } from '../utilities/workoutMethods';
+import Video from '../components/Video';
+import VideoPlayer from 'react-native-video-controls';
 
 const WorkoutStages = ({
   setWorkoutType,
@@ -80,10 +84,12 @@ const WorkoutStages = ({
       [workoutFinishLabel, 5],
     ],
   };
-  const workoutSelected =
-    workoutPlans && workoutType
-      ? workoutPlans[workoutType]
-      : defaultDataStructure[workoutType];
+  // let workoutSelected =
+  //   workoutPlans && workoutType
+  //     /? workoutPlans[workoutType]
+  //     : defaultDataStructure[workoutType];
+
+  let workoutSelected = workoutPlans[workoutType];
 
   if (currentStageNumber < 0) {
     setTimeLeft(workoutSelected[0][1]);
@@ -137,9 +143,9 @@ const WorkoutStages = ({
         <View style={{position: 'absolute', top: 10, left: 5}}>
           <Text style={styles.headerText}>{exerciseName} </Text>
           <Text style={styles.headerSubtitle}>
-            {exerciseName === startText
+            {exerciseName === workoutStartLabel
               ? 'workout starts in...'
-              : exerciseName === finishedText
+              : exerciseName === workoutFinishLabel
               ? 'you are awesome!'
               : exerciseName === 'rest'
               ? 'Catch your breath'
@@ -149,9 +155,10 @@ const WorkoutStages = ({
 
         {/* isExercise(exerciseName) || exerciseName == finishedText?  null : <View style={{height: 90}}></View> */}
         <Text style={styles.timeLeft}>{timeLeft}s</Text>
-        {isExercise(exerciseName) || exerciseName == finishedText ? (
-          <Video
-            source={videoPerExercise[exerciseName]}
+        {isExercise(exerciseName) || exerciseName == workoutFinishLabel ? (
+          <VideoPlayer
+            fullScreenOrientation="all"
+            source={videosPerExercise[exerciseName]}
             rate={1.0}
             volume={1.0}
             isMuted={false}
@@ -240,14 +247,6 @@ const styles = StyleSheet.create({
   nextText: {
     color: 'white',
   },
-  previous: {
-    // flex: 1,
-    color: 'white',
-  },
-  previousText: {
-    color: 'white',
-  },
-
   back: {
     textAlign: 'center',
     color: 'white',

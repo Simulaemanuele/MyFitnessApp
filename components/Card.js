@@ -46,27 +46,22 @@ export class WorkoutsCard extends Component {
     const {title, time, image, onPress, type} = this.props;
 
     return (
-      <TouchableOpacity
-        key={title}
-        onPress={onPress(type)}
-        style={{borderRadius: 20}}>
-        <View style={styles.workoutCard}>
-          <ImageBackground
-            source={image}
-            style={styles.image}
-            imageStyle={{borderRadius: 20}}>
-            <View style={styles.innerCard}>
-              <></>
-              <View style={styles.innerCardTxt}>
-                <Text style={styles.txt}>{title}</Text>
-                <Text style={styles.txt}>
-                  {time.toString()} {'min'}
-                </Text>
-              </View>
+      <View style={styles.workoutCard}>
+        <ImageBackground
+          source={image}
+          style={styles.image}
+          imageStyle={{borderRadius: 20}}>
+          <View style={styles.innerCard}>
+            <></>
+            <View style={styles.innerCardTxt}>
+              <Text style={styles.txt}>{title}</Text>
+              <Text style={styles.txt}>
+                {time.toString()} {'min'}
+              </Text>
             </View>
-          </ImageBackground>
-        </View>
-      </TouchableOpacity>
+          </View>
+        </ImageBackground>
+      </View>
     );
   }
 }

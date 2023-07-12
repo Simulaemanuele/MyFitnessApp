@@ -1,8 +1,14 @@
-const isExercise = exercise => {
+import {StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {
+  workoutFinishLabel,
+  workoutStartLabel,
+} from '../mock/workoutsParameters';
+
+export const isExercise = exercise => {
   if (
     exercise === 'rest' ||
-    exercise === startText ||
-    exercise === finishedText
+    exercise === workoutStartLabel ||
+    exercise === workoutFinishLabel
   ) {
     return false;
   }
@@ -61,7 +67,7 @@ export const getAmountOfExercisesTillNow = (workoutSelected, index) => {
   return workoutSelected.length - amountOfRests;
 };
 
-const renderPreviousButton = (
+export const renderPreviousButton = (
   currentStageNumber,
   setCurrentStageNumber,
   workoutSelected,
@@ -86,3 +92,13 @@ const renderPreviousButton = (
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  previous: {
+    // flex: 1,
+    color: 'white',
+  },
+  previousText: {
+    color: 'white',
+  },
+});

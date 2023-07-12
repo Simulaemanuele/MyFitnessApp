@@ -11,6 +11,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import Home from './pages/Home';
@@ -57,19 +58,36 @@ function App() {
   // }
 
   const renderWorkoutStages = () => {
-    return WorkoutStages(
-      setWorkoutType,
-      workoutType,
-      setCurrentStageNumber,
-      currentStageNumber,
-      timeLeft,
-      setTimeLeft,
-      intervalId,
-      isPhone,
-    );
+    if (workoutType !== '') {
+      // return WorkoutStages(
+      //   setWorkoutType,
+      //   workoutType,
+      //   setCurrentStageNumber,
+      //   currentStageNumber,
+      //   timeLeft,
+      //   setTimeLeft,
+      //   intervalId,
+      //   isPhone,
+      // );
+      return (
+        <View style={{flex: 1}}>
+          <WorkoutStages
+            setWorkoutType={setWorkoutType}
+            workoutType={workoutType}
+            setCurrentStageNumber={setCurrentStageNumber}
+            currentStageNumber={currentStageNumber}
+            timeLeft={timeLeft}
+            setTimeLeft={setTimeLeft}
+            intervalId={intervalId}
+            isPhone={isPhone}
+          />
+        </View>
+      );
+    }
   };
 
   const handleCardOnPress = type => {
+    console.log('Type in handle: ', workoutType);
     setWorkoutType(type);
   };
 
@@ -86,22 +104,26 @@ function App() {
         renderItem={({item}) => {
           let IMAGE = item.img;
           return (
-            <View
-              style={{marginBottom: 10, marginHorizontal: 5, elevation: 30}}>
-              <WorkoutsCard
-                title={item.title}
-                time={item.time}
-                image={item.img}
-                onPress={() => handleCardOnPress}
-                type={item.type}
-              />
-            </View>
+            <TouchableOpacity
+              key={item.title}
+              onPress={() => setWorkoutType(item.type)}
+              style={{borderRadius: 20}}>
+              <View
+                style={{marginBottom: 10, marginHorizontal: 5, elevation: 30}}>
+                <WorkoutsCard
+                  title={item.title}
+                  time={item.time}
+                  image={item.img}
+                  type={item.type}
+                />
+              </View>
+            </TouchableOpacity>
           );
         }}
         keyExtractor={item => item.id}
       />
 
-      <View>{workoutType != '' && renderWorkoutStages()}</View>
+      <View>{workoutType != '' ? renderWorkoutStages() : null}</View>
     </View>
   );
 }
