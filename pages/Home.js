@@ -103,14 +103,14 @@ const Home = props => {
               onPress={() => {
                 setWorkoutType(item.type);
                 navigation.navigate('WorkoutStages', {
-                  setWorkoutType,
-                  workoutType,
-                  setCurrentStageNumber,
-                  currentStageNumber,
-                  timeLeft,
-                  setTimeLeft,
-                  intervalId,
-                  isPhone,
+                  setWorkoutType: setWorkoutType,
+                  workoutType: workoutType,
+                  setCurrentStageNumber: setCurrentStageNumber,
+                  currentStageNumber: currentStageNumber,
+                  timeLeft: timeLeft,
+                  setTimeLeft: setTimeLeft,
+                  intervalId: intervalId,
+                  isPhone: isPhone,
                 });
               }}
               style={{borderRadius: 20}}>

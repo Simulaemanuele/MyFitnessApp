@@ -16,16 +16,29 @@ import {
 import Video from '../components/Video';
 import VideoPlayer from 'react-native-video-controls';
 
-const WorkoutStages = ({
-  setWorkoutType,
-  workoutType,
-  setCurrentStageNumber,
-  currentStageNumber,
-  timeLeft,
-  setTimeLeft,
-  intervalId,
-  isPhone,
-}) => {
+const WorkoutStages = (
+  route,
+  // {
+  //   setWorkoutType,
+  //   workoutType,
+  //   setCurrentStageNumber,
+  //   currentStageNumber,
+  //   timeLeft,
+  //   setTimeLeft,
+  //   intervalId,
+  //   isPhone,
+  // },
+) => {
+  const {
+    setWorkoutType,
+    workoutType,
+    setCurrentStageNumber,
+    currentStageNumber,
+    timeLeft,
+    setTimeLeft,
+    intervalId,
+    isPhone,
+  } = route.params;
   const defaultDataStructure = {
     '3min': [
       [workoutStartLabel, 3],
