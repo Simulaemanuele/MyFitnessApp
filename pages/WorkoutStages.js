@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   videosPerExercise,
   workoutFinishLabel,
@@ -15,20 +15,9 @@ import {
 } from '../utilities/workoutMethods';
 import Video from '../components/Video';
 import VideoPlayer from 'react-native-video-controls';
+import {useNavigation} from '@react-navigation/native';
 
-const WorkoutStages = (
-  props,
-  // {
-  //   setWorkoutType,
-  //   workoutType,
-  //   setCurrentStageNumber,
-  //   currentStageNumber,
-  //   timeLeft,
-  //   setTimeLeft,
-  //   intervalId,
-  //   isPhone,
-  // },
-) => {
+const WorkoutStages = props => {
   console.log('Route: ', props);
   const {
     setWorkoutType,
@@ -41,6 +30,9 @@ const WorkoutStages = (
     isPhone,
   } = props.route.params;
   console.log('params: ', props.route.params);
+
+  const navigation = useNavigation();
+
   const defaultDataStructure = {
     '3min': [
       [workoutStartLabel, 3],
@@ -149,6 +141,8 @@ const WorkoutStages = (
     }
   }
 
+  useEffect(() => {}, [props.route.params]);
+
   return (
     <View
       style={[
@@ -164,7 +158,7 @@ const WorkoutStages = (
           alignItems: 'center',
           maxHeight: 700,
         }}>
-        <View style={{position: 'absolute', top: 10, left: 5}}>
+        <View style={{flex: 1, alignItems: 'center'}}>
           <Text style={styles.headerText}>{exerciseName} </Text>
           <Text style={styles.headerSubtitle}>
             {exerciseName === workoutStartLabel
@@ -225,9 +219,10 @@ const WorkoutStages = (
 
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() =>
-            finishWorkout(setWorkoutType, setCurrentStageNumber, intervalId)
-          }>
+          onPress={() => {
+            finishWorkout(setWorkoutType, setCurrentStageNumber, intervalId);
+            navigation.goBack();
+          }}>
           <Text style={styles.back}>Back</Text>
         </TouchableOpacity>
       </View>
@@ -320,8 +315,8 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   videoStyle: {
-    width: 340,
-    height: Platform.OS !== 'web' ? 210 : 190,
+    width: '100%',
+    height: 'auto',
     marginLeft: 0,
     borderRadius: 20,
     marginTop: 20,

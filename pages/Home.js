@@ -76,6 +76,7 @@ const Home = props => {
                     setTimeLeft: setTimeLeft,
                     intervalId: intervalId,
                     isPhone: isPhone,
+                    navigation: navigation,
                   });
                 }
               }}
