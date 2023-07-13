@@ -17,7 +17,7 @@ import Video from '../components/Video';
 import VideoPlayer from 'react-native-video-controls';
 
 const WorkoutStages = (
-  route,
+  props,
   // {
   //   setWorkoutType,
   //   workoutType,
@@ -29,6 +29,7 @@ const WorkoutStages = (
   //   isPhone,
   // },
 ) => {
+  console.log('Route: ', props);
   const {
     setWorkoutType,
     workoutType,
@@ -38,7 +39,8 @@ const WorkoutStages = (
     setTimeLeft,
     intervalId,
     isPhone,
-  } = route.params;
+  } = props.route.params;
+  console.log('params: ', props.route.params);
   const defaultDataStructure = {
     '3min': [
       [workoutStartLabel, 3],
@@ -101,8 +103,17 @@ const WorkoutStages = (
   //   workoutPlans && workoutType
   //     /? workoutPlans[workoutType]
   //     : defaultDataStructure[workoutType];
+  const setWorkoutSelection = type => {
+    let selectedWorkout;
+    if (type !== '') {
+      selectedWorkout = workoutPlans[type];
+    } else {
+      throw new Error('Type is undefined!');
+    }
+    return selectedWorkout;
+  };
 
-  let workoutSelected = workoutPlans[workoutType];
+  let workoutSelected = setWorkoutSelection(workoutType);
 
   if (currentStageNumber < 0) {
     setTimeLeft(workoutSelected[0][1]);

@@ -24,6 +24,8 @@ const Home = props => {
   const [currentStageNumber, setCurrentStageNumber] = useState(-1);
   const [timeLeft, setTimeLeft] = useState(0);
 
+  const intervalId = 0;
+
   useEffect(() => {
     // exit early when we reach 0
     // save intervalId to clear the interval when the
@@ -34,57 +36,13 @@ const Home = props => {
 
     // clear interval on re-render to avoid memory leaks
     return () => clearInterval(intervalId);
-  });
-
-  const intervalId = 0;
-
-  // if (workoutType !== '') {
-  //   return WorkoutStages(
-  //     setWorkoutType,
-  //     workoutType,
-  //     setCurrentStageNumber,
-  //     currentStageNumber,
-  //     timeLeft,
-  //     setTimeLeft,
-  //     intervalId,
-  //     isPhone,
-  //   );
-  // }
-
-  const renderWorkoutStages = () => {
-    if (workoutType !== '') {
-      // return WorkoutStages(
-      //   setWorkoutType,
-      //   workoutType,
-      //   setCurrentStageNumber,
-      //   currentStageNumber,
-      //   timeLeft,
-      //   setTimeLeft,
-      //   intervalId,
-      //   isPhone,
-      // );
-      return (
-        <View style={{flex: 1}}>
-          <WorkoutStages
-            setWorkoutType={setWorkoutType}
-            workoutType={workoutType}
-            setCurrentStageNumber={setCurrentStageNumber}
-            currentStageNumber={currentStageNumber}
-            timeLeft={timeLeft}
-            setTimeLeft={setTimeLeft}
-            intervalId={intervalId}
-            isPhone={isPhone}
-          />
-        </View>
-      );
-    }
-  };
+  }, [workoutType]);
 
   const handleCardOnPress = type => {
-    console.log('Type in handle: ', workoutType);
+    console.log('Type in handle: ', type);
     setWorkoutType(type);
   };
-
+  console.log('DEBUG ==> workoutType after set: ', workoutType);
   return (
     <View style={styles.container}>
       <View style={styles.headerSection}>
@@ -101,17 +59,25 @@ const Home = props => {
             <TouchableOpacity
               key={item.title}
               onPress={() => {
-                setWorkoutType(item.type);
-                navigation.navigate('WorkoutStages', {
-                  setWorkoutType: setWorkoutType,
-                  workoutType: workoutType,
-                  setCurrentStageNumber: setCurrentStageNumber,
-                  currentStageNumber: currentStageNumber,
-                  timeLeft: timeLeft,
-                  setTimeLeft: setTimeLeft,
-                  intervalId: intervalId,
-                  isPhone: isPhone,
-                });
+                console.log(
+                  'DEBUG ==> type in onPress method Home.js: ',
+                  item.type,
+                );
+
+                handleCardOnPress(item.type);
+
+                if (workoutType !== '') {
+                  navigation.navigate('WorkoutStages', {
+                    setWorkoutType: setWorkoutType,
+                    workoutType: workoutType,
+                    setCurrentStageNumber: setCurrentStageNumber,
+                    currentStageNumber: currentStageNumber,
+                    timeLeft: timeLeft,
+                    setTimeLeft: setTimeLeft,
+                    intervalId: intervalId,
+                    isPhone: isPhone,
+                  });
+                }
               }}
               style={{borderRadius: 20}}>
               <View
@@ -129,7 +95,7 @@ const Home = props => {
         keyExtractor={item => item.id}
       />
 
-      <View>{workoutType != '' ? renderWorkoutStages() : null}</View>
+      {/* <View>{workoutType != '' ? renderWorkoutStages() : null}</View> */}
     </View>
   );
 };
